@@ -1,0 +1,67 @@
+{% include 'chead.html'%}
+<div class="row">
+    <div class="col-md-4"></div>
+    <div class="col-md-4">
+    <div class="card p-3 mt-5">
+        <form action="reserveProperty2" method="post">
+            <div class="h4 text-center ">Pay Amount</div>
+            <div class="row">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="text-muted">Duration</div>
+                        <div class="h5">
+                            {% if  month_difference!=0: %}
+                                {{month_difference}} Months
+                            {% endif %}
+                            {% if  remain_dates!=0: %}
+                                {{remain_dates}} Days
+                            {% endif %}
+                         </div>
+                    </div>
+                    <div class="col-md-6 text-end">
+                        <div class="text-muted">Total</div>
+                        <div class="h5">$ {{total_price}}</div>
+                    </div>
+                    <div class="col-md-12 h5 mt-3">
+                        {% if  month_difference!=0: %}
+                                for {{month_difference}} Months => {{month_difference}} X $ {{pricePerMonth}} = $ {{month_difference*pricePerMonth}}
+                        {% endif %}
+                    </div>
+                    <div class="col-md-12 h5 mt-3">
+                        {% if  remain_dates!=0: %}
+                                for {{remain_dates}} Days => {{remain_dates}} X $ {{pricePerDay}} = $ {{int(remain_dates)*int(pricePerDay)}}
+                        {% endif %}
+                    </div>
+                </div>
+                <div class="col-md-12 mt-3">
+                    <div class="form-group mt-1 ">
+                        <input type="hidden" name="Property_id" value="{{Property_id}}">
+                        <input type="hidden" name="fromDate" value="{{fromDate}}">
+                        <input type="hidden" name="toDate" value="{{toDate}}">
+                        <input type="hidden" name="total_price" value="{{total_price}}">
+                        <label for="cardNumber">Card Number</label>
+                        <input type="number" class="form-control mt-1" id="cardNumber" placeholder="Enter CardNumber" name="cardNumber" required>
+                    </div>
+                    <div class="form-group mt-1 ">
+                        <label for="nameOnCard">Name On Card</label>
+                        <input type="text" class="form-control mt-1" id="nameOnCard" placeholder="Enter cvv" name="nameOnCard" required>
+                    </div>
+
+                </div>
+                <div class="col-md-12">
+                    <div class="form-group mt-1 ">
+                        <label for="cvv">Enter Cvv</label>
+                        <input type="number" class="form-control mt-1" id="cvv" placeholder="Enter cvv" name="cvv" required>
+                    </div>
+                    <div class="form-group mt-1 ">
+                        <label for="cvv">Expire Date</label>
+                        <input type="text" class="form-control mt-1" id="expireDate" placeholder="Enter Expire Date" name="expireDate" required>
+                    </div>
+                    <input type="submit" value="Pay Amount" class="btn btn-primary w-100 mt-4">
+                </div>
+
+            </div>
+        </form>
+    </div>
+    </div>
+</div>

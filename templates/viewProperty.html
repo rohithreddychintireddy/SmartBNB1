@@ -1,0 +1,271 @@
+{% if role =='Host'%}
+{% include 'hhead.html'%}
+{% elif role =='Customer'%}
+{% include 'chead.html'%}
+{% endif%}
+<div class="mt-3">
+    <div class="container">
+        <form action="viewProperty">
+            <input type="hidden" name="Place_id" value="{{Place_id}}">
+        <div class="row">
+            <div class="col-md-3 h6 ">
+                <input type="radio" name="propertyType" value="all" checked  onclick="this.form.submit()" class="form-check-input" id="all">&nbsp; &nbsp;<label for="all" class="form-check-label">All</label>
+            </div>
+            <div class="col-md-3 h6 ">
+                <input type="radio" name="propertyType" value="house" {%if propertyType=='house': %} checked {%endif%} onclick="this.form.submit()" class="form-check-input" id="house">&nbsp; &nbsp;<label for="house" class="form-check-label">Houses</label>
+            </div>
+            <div class="col-md-3 h6">
+                <input type="radio" name="propertyType" value="apartment" {%if propertyType=='apartment': %} checked {%endif%}onclick="this.form.submit()" class="form-check-input" id="apartment"> &nbsp; &nbsp; <label for="apartment">Apartments</label>
+            </div>
+            <div class="col-md-3 h6">
+                <input type="radio" name="propertyType" value="condos" {%if propertyType=='condos': %} checked {%endif%}onclick="this.form.submit()" class="form-check-input" id="condos"> &nbsp; &nbsp;<label for="condos">Condominiums</label>
+            </div>
+        </div>
+        </form>
+
+        <div class="row">
+
+            {% for Property in Properties:%}
+            {% set placename =getPlace(Property['Place_id'])%}
+            {% if Property['propertyType']=='house' :%}
+
+            <div class="h4">{{placename['placeName']}},{{placename['country']}}</div>
+            <div class="row">
+                <div class="col-md-6">
+                {% for image in Property['Pictures']%}
+                {% if loop.index ==1:  %}
+                    <div class="">
+                        <img src="static/pictures/{{image}}" class="img-thumbnail" style="height:400px;max-width:100%">
+                    </div>
+                {% endif %}
+                {% endfor%}
+                </div>
+                <div class="col-md-6">
+                    <div class="row">
+                    {% for image in Property['Pictures']%}
+                    {% if loop.index !=1:  %}
+                    <div class="col-md-6">
+                        <div class="">
+                            <img src="static/pictures/{{image}}" class="img-thumbnail" style="height:200px;max-width:100%">
+                        </div>
+                    </div>
+                    {% endif %}
+                    {% endfor%}
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-8"></div>
+                    <div class="col-md-2">
+                         <div class="text-end">
+                            <a href="viewReservedDates?Property_id={{Property['_id']}}" class="btn btn-primary">View Availability</a>
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        {% if role =='Customer'%}
+                        <div class="text-end">
+                            <a href="reserveProperty?Property_id={{Property['_id']}}&pricePerDay={{Property['pricePerDay']}}&pricePerMonth={{Property['pricePerMonth']}}" class="btn btn-primary">Reserve Property</a>
+                        </div>
+                        {% endif%}
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-3">
+                        <div class="text-muted">House Number</div>
+                        <div class="h5">{{Property['houseNumber']}}</div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="text-muted">Phone Number</div>
+                        <div class="h5">{{Property['phone']}}</div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="text-muted">Rest Rooms</div>
+                        <div class="h5">{{Property['numberOfRestRooms']}}</div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="text-muted">Bed Rooms</div>
+                        <div class="h5">{{Property['numberOfBedRooms']}}</div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="text-muted">Area Occupied</div>
+                        <div class="h5">{{Property['areaOccupiede']}}</div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="text-muted">Owner Name</div>
+                        <div class="h5">{{Property['ownerName']}}</div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="text-muted">Price Per Day</div>
+                        <div class="h5">$ {{Property['pricePerDay']}}</div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="text-muted">Price Per Month</div>
+                        <div class="h5">$ {{Property['pricePerMonth']}}</div>
+                    </div>
+                </div>
+                 {% endif %}
+        </div>
+        {% if Property['propertyType']=='apartment' :%}
+        <div class="container">
+            <div class="h4">{{placename['placeName']}}, {{Property['area']}},{{placename['country']}}</div>
+            <div class="row">
+                <div class="col-md-6">
+                {% for image in Property['Pictures']%}
+                {% if loop.index ==1:  %}
+                    <div class="">
+                        <img src="static/pictures/{{image}}" class="img-thumbnail" style="height:400px;max-width:100%">
+                    </div>
+                {% endif %}
+                {% endfor%}
+                </div>
+                <div class="col-md-6">
+                    <div class="row">
+                    {% for image in Property['Pictures']%}
+                    {% if loop.index !=1:  %}
+                    <div class="col-md-6">
+                        <div class="">
+                            <img src="static/pictures/{{image}}" class="img-thumbnail" style="height:200px;max-width:100%">
+                        </div>
+                    </div>
+                    {% endif %}
+                    {% endfor%}
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-8"></div>
+                <div class="col-md-2">
+                     <div class="text-end">
+                        <a href="viewReservedDates?Property_id={{Property['_id']}}" class="btn btn-primary">View Availability</a>
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    {% if role =='Customer'%}
+                    <div class="text-end">
+                        <a href="reserveProperty?Property_id={{Property['_id']}}&pricePerDay={{Property['pricePerDay']}}&pricePerMonth={{Property['pricePerMonth']}}" class="btn btn-primary">Reserve Property</a>
+                    </div>
+                    {% endif%}
+                </div>
+            </div>
+
+
+            <div class="row">
+                    <div class="col-md-3">
+                        <div class="text-muted">Apartment Number</div>
+                        <div class="h5">{{Property['apartmentNumber']}}</div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="text-muted">Phone Number</div>
+                        <div class="h5">{{Property['phone']}}</div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="text-muted">Rest Rooms</div>
+                        <div class="h5">{{Property['numberOfRestRooms']}}</div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="text-muted">Bed Rooms</div>
+                        <div class="h5">{{Property['numberOfBedRooms']}}</div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="text-muted">Area Occupied</div>
+                        <div class="h5">{{Property['areaOccupiede']}}</div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="text-muted">Car ParkingSlots</div>
+                        <div class="h5">{{Property['carParkingSlots']}}</div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="text-muted">Price Per Day</div>
+                        <div class="h5">$ {{Property['pricePerDay']}}</div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="text-muted">Price Per Month</div>
+                        <div class="h5">$ {{Property['pricePerMonth']}}</div>
+                    </div>
+                </div>
+        </div>
+          {% endif%}
+         </div>
+         {% if Property['propertyType']=='condos' :%}
+    <div class="container">
+        <div class="h4">{{placename['placeName']}},{{placename['country']}}</div>
+        <div class="row">
+                <div class="col-md-6">
+                {% for image in Property['Pictures']%}
+                {% if loop.index ==1:  %}
+                    <div class="">
+                        <img src="static/pictures/{{image}}" class="img-thumbnail" style="height:400px;max-width:100%">
+                    </div>
+                {% endif %}
+                {% endfor%}
+                </div>
+                <div class="col-md-6">
+                    <div class="row">
+                    {% for image in Property['Pictures']%}
+                    {% if loop.index !=1:  %}
+                    <div class="col-md-6">
+                        <div class="">
+                            <img src="static/pictures/{{image}}" class="img-thumbnail" style="height:200px;max-width:100%">
+                        </div>
+                    </div>
+                    {% endif %}
+                    {% endfor%}
+                    </div>
+                </div>
+            </div>
+        <div class="row">
+            <div class="col-md-8"></div>
+            <div class="col-md-2">
+                 <div class="text-end">
+                    <a href="viewReservedDates?Property_id={{Property['_id']}}" class="btn btn-primary">View Availability</a>
+                </div>
+            </div>
+            <div class="col-md-2">
+                {% if role =='Customer'%}
+                <div class="text-end">
+                    <a href="reserveProperty?Property_id={{Property['_id']}}&pricePerDay={{Property['pricePerDay']}}&pricePerMonth={{Property['pricePerMonth']}}" class="btn btn-primary">Reserve Property</a>
+                </div>
+                {% endif%}
+            </div>
+        </div>
+                <div class="row">
+                    <div class="col-md-3">
+                        <div class="text-muted">Number Of Guests</div>
+                        <div class="h5">{{Property['numberOfGuest']}}</div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="text-muted">Rest Rooms</div>
+                        <div class="h5">{{Property['numberOfRestRooms']}}</div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="text-muted">Bed Rooms</div>
+                        <div class="h5">{{Property['numberOfBedRooms']}}</div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="text-muted">Number of Bathrooms</div>
+                        <div class="h5">{{Property['numberofBathRooms']}}</div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="text-muted">Number of Beds</div>
+                        <div class="h5">{{Property['numberofbeds']}}</div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="text-muted">Specialities</div>
+                        <div class="h5">{{Property['specialities']}}</div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="text-muted">Price Per Day</div>
+                        <div class="h5">$ {{Property['pricePerDay']}}</div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="text-muted">Price Per Month</div>
+                        <div class="h5">$ {{Property['pricePerMonth']}}</div>
+                    </div>
+                </div>
+          {% endif%}
+    </div>
+        {% endfor%}
+</div>
+</div>
+</div>
+

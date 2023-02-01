@@ -1,0 +1,196 @@
+{% include 'chead.html'%}
+<div class="container mt-3">
+    <div class="row">
+        {% for detail in details:%}
+        {% set customers =getCustomers(detail['Customer_id'])%}
+        {% set Property =getProperty(detail['Property_id'])%}
+        {% set placename =getPlace(Property['Place_id'])%}
+        {% set places =getPlaces(Property['Place_id'])%}
+        <div class="col-md-6">
+            <div class="card p-3">
+                <div class="h4">{{placename['placeName']}},{{placename['country']}}</div>
+                <div class="row">
+                <div class="col-md-6">
+                {% for image in Property['Pictures']%}
+                {% if loop.index ==1:  %}
+                    <div class="">
+                        <img src="static/pictures/{{image}}" class="img-thumbnail" style="height:200px;max-width:100%">
+                    </div>
+                {% endif %}
+                {% endfor%}
+                </div>
+                <div class="col-md-6">
+                    <div class="row">
+                    {% for image in Property['Pictures']%}
+                    {% if loop.index !=1:  %}
+                    <div class="col-md-6">
+                        <div class="">
+                            <img src="static/pictures/{{image}}" class="img-thumbnail" style="height:100px;max-width:100%">
+                        </div>
+                    </div>
+                    {% endif %}
+                    {% endfor%}
+                    </div>
+                </div>
+                {% if Property['propertyType']=='house' :%}
+                    <div class="row">
+                    <div class="col-md-3">
+                        <div class="text-muted" style="font-size:70%">House Number</div>
+                        <div class="h6">{{Property['houseNumber']}}</div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="text-muted" style="font-size:70%">Phone Number</div>
+                        <div class="h6">{{Property['phone']}}</div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="text-muted" style="font-size:70%">Rest Rooms</div>
+                        <div class="h6">{{Property['numberOfRestRooms']}}</div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="text-muted" style="font-size:70%">Bed Rooms</div>
+                        <div class="h6">{{Property['numberOfBedRooms']}}</div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="text-muted" style="font-size:70%">Area Occupied</div>
+                        <div class="h6">{{Property['areaOccupiede']}}</div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="text-muted" style="font-size:70%">Owner Name</div>
+                        <div class="h6">{{Property['ownerName']}}</div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="text-muted" style="font-size:70%">Price Per Day</div>
+                        <div class="h6">$ {{Property['pricePerDay']}}</div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="text-muted" style="font-size:70%">Price Per Month</div>
+                        <div class="h6">$ {{Property['pricePerMonth']}}</div>
+                    </div>
+                </div>
+                {% endif %}
+                {% if Property['propertyType']=='apartment' :%}
+                    <div class="row">
+                        <div class="col-md-3">
+                            <div class="text-muted" style="font-size:70%">Apartment Number</div>
+                            <div class="h6">{{Property['apartmentNumber']}}</div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="text-muted" style="font-size:70%">Phone Number</div>
+                            <div class="h6">{{Property['phone']}}</div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="text-muted" style="font-size:70%">Rest Rooms</div>
+                            <div class="h6">{{Property['numberOfRestRooms']}}</div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="text-muted" style="font-size:70%">Bed Rooms</div>
+                            <div class="h6">{{Property['numberOfBedRooms']}}</div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="text-muted" style="font-size:70%">Area Occupied</div>
+                            <div class="h6">{{Property['areaOccupiede']}}</div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="text-muted" style="font-size:70%">Car ParkingSlots</div>
+                            <div class="h6">{{Property['carParkingSlots']}}</div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="text-muted" style="font-size:70%">Price Per Day</div>
+                            <div class="h6">$ {{Property['pricePerDay']}}</div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="text-muted" style="font-size:70%">Price Per Month</div>
+                            <div class="h6">$ {{Property['pricePerMonth']}}</div>
+                        </div>
+                    </div>
+                {% endif %}
+                {% if Property['propertyType']=='condos' :%}
+                    <div class="row">
+                    <div class="col-md-3">
+                        <div class="text-muted" style="font-size:70%">Number Of Guests</div>
+                        <div class="h6">{{Property['numberOfGuest']}}</div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="text-muted" style="font-size:70%">Rest Rooms</div>
+                        <div class="h6">{{Property['numberOfRestRooms']}}</div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="text-muted" style="font-size:70%">Bed Rooms</div>
+                        <div class="h6">{{Property['numberOfBedRooms']}}</div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="text-muted" style="font-size:70%">Number of Bathrooms</div>
+                        <div class="h6">{{Property['numberofBathRooms']}}</div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="text-muted" style="font-size:70%">Number of Beds</div>
+                        <div class="h6">{{Property['numberofbeds']}}</div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="text-muted" style="font-size:70%">Specialities</div>
+                        <div class="h6">{{Property['specialities']}}</div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="text-muted" style="font-size:70%">Price Per Day</div>
+                        <div class="h6">$ {{Property['pricePerDay']}}</div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="text-muted" style="font-size:70%">Price Per Month</div>
+                        <div class="h6">$ {{Property['pricePerMonth']}}</div>
+                    </div>
+                </div>
+                {% endif %}
+                  <hr>
+                 <div class="row">
+                     <div class="col-md-6">
+                         <div class="text-secondary">From Date</div>
+                         <div class="h6">{{detail['fromDate']}}</div>
+                         <div class="text-secondary">To Date</div>
+                         <div class="h6">{{detail['toDate']}}</div>
+                     </div>
+                     <div class="col-md-6">
+                         <div class="text-secondary">Booked Date</div>
+                         <div class="h6">{{detail['BookedDate'].strftime("%c")}}</div>
+                            <div class="text-secondary">Amount Paid</div>
+                         <div class="h6">$ {{detail['total_price']}}</div>
+                     </div>
+                 </div>
+                <div class="card-footer">
+                    <div class="row">
+                        <div class="col-md-4">
+                             <div class="text-secondary">Customer Name</div>
+                             <div class="h6">{{customers['phone']}}</div>
+                        </div>
+                        <div class="col-md-4">
+                             <div class="text-secondary">Status</div>
+                             <div class="h6">{{customers['name']}}</div>
+                        </div>
+                        <div class="col-md-4">
+                             <div class="text-secondary">Status</div>
+                             <div class="h6">{{customers['email']}}</div>
+                        </div>
+                        <div class="col-md-8">
+                            <div class="text-secondary">Status</div>
+                            <div class="h6">{{detail['status']}} </div>
+                        </div>
+
+                        <div class="col-md-4 mt-1">
+                            <div class="">
+                                 {% if detail['status'] =='Property Reserved'%}
+                                 <a href="vacateProperty?Booking_id={{detail['_id']}}" class="btn btn-primary w-100">Vacate</a>
+                                 {% endif%}
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        </div>
+        {% endfor%}
+
+</div>
+</div>
+
+
+

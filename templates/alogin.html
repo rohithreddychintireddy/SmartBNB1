@@ -1,0 +1,25 @@
+{% include 'mhead.html'%}
+<div class="row" style="background-image:url('static/images/alog1.jpeg');height:100vh;background-size: cover;margin-top:-10px">
+    <div class="col-md-7"></div>
+    <div class="col-md-4 ms-2">
+        <div class="card p-4 mt-5">
+            <form action="alogin1" method="post">
+                <div class="h4 text-center">Admin Login</div>
+                <div class="form-group">
+                    <i class="fa fa-user"></i>
+                    <label for="Username" >User Name</label>
+                    <input type="text" class="form-control mt-1" id="Username" placeholder="Enter Username" name="Username" required>
+                </div>
+                <div class="form-group mt-2">
+                    <i class="fa fa-key"></i>
+                    <label for="Password">Password</label>
+                    <input type="Password" class="form-control mt-1" id="Password" placeholder="Enter Password" name="Password" required>
+                </div>
+                <input type="submit" value="Login" class="btn btn-info w-100 mt-3">
+            </form>
+        </div>
+
+    </div>
+    <div class="col-md-1"></div>
+
+</div>

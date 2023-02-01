@@ -1,0 +1,19 @@
+{% include 'ahead.html'%}
+<div class="container">
+    <div class="text-center h4 mt-3">View Places</div>
+    <table class="table table-bordered ">
+        <tr>
+            <th>Place Name</th>
+            <th>Country</th>
+        </tr>
+        {% for Place in Places: %}
+        <tr>
+            <td>
+                <img src="static/Places/{{Place['image']}}" class="img-thumbnail" style="height:100px;max-width:100%">
+                {{Place['placeName']}}
+            </td>
+            <td>{{Place['country']}}</td>
+        </tr>
+      {% endfor %}
+    </table>
+</div>

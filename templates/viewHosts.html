@@ -1,0 +1,31 @@
+{% include 'ahead.html'%}
+<div class="container-fluid">
+    <div class="text-center h4 mt-3">Hosts List</div>
+    <table class="table table-bordered ">
+        <tr>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Phone</th>
+            <th>About</th>
+            <th>IsVerified</th>
+             <th>Action</th>
+        </tr>
+        {% for Host in Hosts: %}
+        <tr>
+            <td>{{Host['name']}}</td>
+            <td>{{Host['email']}}</td>
+            <td>{{Host['phone']}}</td>
+            <td>{{Host['about']}}</td>
+              <td>{{Host['isVerified']}}</td>
+            <td>
+            {% if Host['isVerified'] == "not Verified" :%}
+                <a href="HostStatus?Host_id={{Host['_id']}}" class="btn btn-success w-100">Verify</a>
+                {% else :%}
+                <a href="HostStatus1?Host_id={{Host['_id']}}" class="btn btn-danger w-100">Deactivate</a>
+                {% endif %}
+            </td>
+
+        </tr>
+      {% endfor %}
+    </table>
+</div>

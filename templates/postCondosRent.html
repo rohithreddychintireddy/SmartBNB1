@@ -1,0 +1,74 @@
+{% include 'hhead.html'%}
+<div class="container">
+    <div class="card p-3 mt-3">
+        <form action="postCondosRent1" method="post" enctype="multipart/form-data">
+            <input type="hidden" name="propertyType" value="condos">
+            <div class="h4 text-center">Post Condominium Rent</div>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group mt-1">
+                        <label for="Category_id">Category</label>
+                        <select name="Category_id" id="Category_id" class="form-control">
+                            {% for Category in Categories:%}
+                        <option value="{{Category['_id']}}">{{Category['categoryName']}}</option>
+                            {% endfor%}
+
+                        </select>
+                    </div>
+                         <div class="form-group mt-1">
+                        <label for="Place_id">Place</label>
+                        <select name="Place_id" id="Place_id" class="form-control mt-1 ">
+                            {% for Place in Places:%}
+                        <option value="{{Place['_id']}}">{{Place['placeName']}}, {{Place['country']}}</option>
+                            {% endfor%}
+
+                        </select>
+                    </div>
+                    <div class="form-group mt-2">
+                        <label for="numberofbeds">Number of Beds</label>
+                        <input type="tel" class="form-control" id="numberofbeds" placeholder="Enter Number of beds" name="numberofbeds" required>
+                    </div>
+                      <div class="form-group mt-2">
+                        <label for="numberOfBedRooms">Number Of Bed Rooms</label>
+                        <input type="text" class="form-control" id="numberOfBedRooms" placeholder="Enter Number Of Bed Rooms" name="numberOfBedRooms" required>
+                    </div>
+                      <div class="form-group mt-2">
+                        <label for="Pictures">Chose Picture</label>
+                        <input type="file" class="form-control" id="Pictures" multiple  name="Pictures" required>
+                    </div>
+                    <div class="form-group mt-2">
+                        <label for="specialities">Specialities</label>
+                        <input type="text" class="form-control" id="specialities" placeholder="Enter Specialities" name="specialities" required>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group mt-2">
+                        <label for="numberOfRestRooms">Number Of Rest Rooms</label>
+                        <input type="text" class="form-control" id="numberOfRestRooms" placeholder="Enter Number Of Rest Rooms" name="numberOfRestRooms" required>
+                    </div>
+                       <div class="form-group mt-1">
+                        <label for="numberofBathRooms">Number Of BathRooms</label>
+                        <input type="text" class="form-control" id="numberofBathRooms" placeholder="Enter number of Bath Rooms" name="numberofBathRooms" required>
+                    </div>
+                   <div class="form-group mt-2">
+                        <label for="numberOfGuest">Number Of Guest Allowed</label>
+                        <input type="text" class="form-control" id="numberOfGuest" placeholder="Enter number of Guest" name="numberOfGuest" required>
+                    </div>
+                     <div class="form-group mt-2">
+                        <label for="pricePerDay">Price Per Day</label>
+                        <input type="number" class="form-control" id="pricePerDay" placeholder="Enter price Per Day" name="pricePerDay" required>
+                    </div>
+                         <div class="form-group mt-2">
+                        <label for="pricePerMonth">Price Per Month</label>
+                        <input type="number" class="form-control" id="pricePerMonth" placeholder="Enter Price Per Month" name="pricePerMonth" required>
+                    </div>
+                    <div class="mt-2">
+                        <input type="submit" value="Post Condos Rent" class="btn btn-primary w-100 mt-4">
+                    </div>
+                </div>
+            </div>
+
+        </form>
+    </div>
+    </div>
+</div>

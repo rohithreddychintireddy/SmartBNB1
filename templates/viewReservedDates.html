@@ -1,0 +1,17 @@
+{% if session['role'] =='Host'%}
+{% include 'hhead.html'%}
+{% elif session['role'] =='Customer'%}
+{% include 'chead.html'%}
+{% endif%}
+<div class="row">
+    <div class="col-md-3"></div>
+    <div class="col-md-6">
+        <div class="card mt-4">
+            <div class="text-center h5 p-3">This Property not Available in Below Dates</div>
+            {% for Booking in Bookings: %}
+                <div class="h4  text-center text-info">{{Booking['fromDate']}} to {{Booking['toDate']}}</div>
+            {% endfor %}
+        </div>
+    </div>
+    <div class="col-md-3"></div>
+</div>

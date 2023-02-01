@@ -1,0 +1,47 @@
+{% if role =='Host'%}
+{% include 'hhead.html'%}
+{% elif role =='Customer'%}
+{% include 'chead.html'%}
+{% endif%}
+<div class="container-fluid mt-2">
+    <form action="ViewHostPosts">
+        <div class="row">
+            <div class="col-md-4"></div>
+            <div class="col-md-3">
+                <input type="text" {% if search!=None: %} value="{{search}}"{%endif%} name="search" placeholder="search Place" class="form-control">
+            </div>
+            <div class="col-md-2">
+                <input type="submit" value="search">
+            </div>
+            <div class="col-md-3"></div>
+        </div>
+    </form>
+    <div class="container mt-2">
+        <div class="row">
+            {% for Category in Categories:%}
+                <div class="col-md-1">
+                    <a style="text-decoration:None" href="ViewHostPosts?Category_id={{str(Category['_id'])}}">
+                    <div class="text-center"><i class="{{Category['categoryIcon']}}"></i></div>
+                    <div class="text-center">{{Category['categoryName']}}</div>
+                    </a>
+                </div>
+            {% endfor%}
+        </div>
+    </div>
+<div class="container mt-2">
+    <div class="row">
+        {% for Place in Places:%}
+        <div class="col-md-3">
+            <a href="viewProperty?Place_id={{Place['_id']}}" style="text-decoration:None;color:black">
+                <div class="card">
+                    <img src="static/Places/{{Place['image']}}" class="img-thumbnail" style="height:135px;max-width:100%">
+                    <div class="text-dark m-2 text-capitalize">{{Place['placeName']}}, {{Place['country']}}</div>
+                </div>
+            </a>
+
+        </div>
+
+        {% endfor%}
+    </div>
+</div>
+</div>

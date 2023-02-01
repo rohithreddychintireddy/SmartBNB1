@@ -1,0 +1,27 @@
+{% include 'chead.html'%}
+<div class="container ">
+    <div class="card p-3 mt-5">
+        <form action="reserveProperty1" method="post">
+            <div class="h4 text-center ">Book Property</div>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group mt-1 ">
+                        <input type="hidden" name="Property_id" value="{{Property_id}}">
+                        <input type="hidden" name="pricePerDay" value="{{pricePerDay}}">
+                        <input type="hidden" name="pricePerMonth" value="{{pricePerMonth}}">
+                        <label for="fromDate">From Date</label>
+                        <input type="date" class="form-control mt-1" id="fromDate"  name="fromDate" required>
+                    </div>
+
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group mt-1 ">
+                        <label for="toDate">To Date</label>
+                        <input type="date" class="form-control mt-1" id="toDate"  name="toDate" required>
+                    </div>
+                </div>
+                   <input type="submit" value="Submit" class="btn btn-primary w-100 mt-4">
+            </div>
+        </form>
+    </div>
+</div>
